@@ -63,4 +63,8 @@
         self.display.text = [self.display.text stringByAppendingString:space];
     }
 }
+- (IBAction)clearPressed {
+    self.display.text = @"0";
+    
+}
 @end
