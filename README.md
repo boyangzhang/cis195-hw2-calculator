@@ -6,3 +6,5 @@ I used the Stanford slide deck as the basis for my calculator which is why the n
 http://www.lawrence.edu/fast/greggj/CMSC270/Infix.html
 
 I also want to take 1 late day to fix some corner cases!
+
+Also divide by 0 returns 0 in that part of the operator because I don't wanna deal with NaNs

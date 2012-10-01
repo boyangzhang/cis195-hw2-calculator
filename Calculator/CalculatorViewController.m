@@ -11,6 +11,7 @@
 
 @interface CalculatorViewController ()
 @property (nonatomic) BOOL userIsInTheMiddleOfEnteringAnExpression;
+@property (nonatomic) BOOL userJustEnteredAnOperator;
 @property (nonatomic, strong) CalculatorBrain *brain;
 @end
 
@@ -18,6 +19,7 @@
 
 @synthesize display;
 @synthesize userIsInTheMiddleOfEnteringAnExpression;
+@synthesize userJustEnteredAnOperator;
 @synthesize brain = _brain;
 
 - (CalculatorBrain *) brain{
@@ -34,7 +36,7 @@
         self.display.text = digit;
         self.userIsInTheMiddleOfEnteringAnExpression = YES;
     }
-    
+    self.userJustEnteredAnOperator = NO;
 }
 - (IBAction)enterPressed {
     double total = 0;
@@ -54,17 +56,21 @@
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
-    NSString *operator = [sender currentTitle];
-    NSString *space = @" ";
-    if(userIsInTheMiddleOfEnteringAnExpression) {
-        //tagging on operators 
-        self.display.text = [self.display.text stringByAppendingString:space];
-        self.display.text = [self.display.text stringByAppendingString:operator];
-        self.display.text = [self.display.text stringByAppendingString:space];
+    if(!self.userJustEnteredAnOperator){
+        NSString *operator = [sender currentTitle];
+        NSString *space = @" ";
+        if(userIsInTheMiddleOfEnteringAnExpression) {
+            //tagging on operators 
+            self.display.text = [self.display.text stringByAppendingString:space];
+            self.display.text = [self.display.text stringByAppendingString:operator];
+            self.display.text = [self.display.text stringByAppendingString:space];
+        }
+        self.userJustEnteredAnOperator = YES;
     }
 }
 - (IBAction)clearPressed {
     self.display.text = @"0";
-    
+    self.userIsInTheMiddleOfEnteringAnExpression = NO;
+    self.userJustEnteredAnOperator = NO;
 }
 @end
