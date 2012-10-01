@@ -73,4 +73,31 @@
     self.userIsInTheMiddleOfEnteringAnExpression = NO;
     self.userJustEnteredAnOperator = NO;
 }
+
+
+- (IBAction)backspacePressed {
+    if(!self.display.text.length != 1){
+        //if whitespace is found we know we need to remove an operator
+        //needs to reset all the permission booleans
+        NSString *operatorCheck = [self.display.text substringWithRange:NSMakeRange(self.display.text.length - 1, 1)];
+        if([operatorCheck isEqualToString:@" "]){
+            self.display.text = [self.display.text substringToIndex:(self.display.text.length - 3)];
+            self.userJustEnteredAnOperator = NO;
+        }
+        else{
+            self.display.text = [self.display.text substringToIndex:(self.display.text.length - 1)];
+        }
+        
+        if(self.display.text.length == 0){
+            self.display.text = @"0";
+            self.userIsInTheMiddleOfEnteringAnExpression = NO;
+            self.userJustEnteredAnOperator = NO;
+        }
+    }
+    else{
+        self.display.text = @"0";
+        self.userIsInTheMiddleOfEnteringAnExpression = NO;
+        self.userJustEnteredAnOperator = NO;
+    }
+}
 @end

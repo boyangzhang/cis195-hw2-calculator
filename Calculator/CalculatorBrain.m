@@ -75,6 +75,8 @@
     if(item) [self.resultQueue removeObjectAtIndex:0];
     return item;
 }
+
+//Does the mathematical calculations
 - (double)performOperation:(NSString *)operation{
     double result = 0;
     
@@ -128,20 +130,25 @@
             NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
             [f setNumberStyle:NSNumberFormatterDecimalStyle];
             NSNumber * myNumber = [f numberFromString:[expressionTokens objectAtIndex:i]];
+            //enqueues all numbers
             NSLog(@"Enqueuing number: %f", [myNumber doubleValue]);
             [self enqueueItem:myNumber];
             	
         }
         else{
             if(self.operatorStack.count == 0){
+                //if operaterstack is empty enqueue operator
                 NSLog(@"Operator Stack is empty, pushing %@", [expressionTokens objectAtIndex:i]);
                 [self pushOperator:[expressionTokens objectAtIndex:i]];
             }
             else if([[operatorPrecedence objectForKey:[expressionTokens objectAtIndex:i]] intValue] > [[operatorPrecedence objectForKey:[self.operatorStack lastObject]] intValue]){
+                //if the operator has greater precedence push onto stack
                 NSLog(@"Pushing %@ to operator stack", [expressionTokens objectAtIndex:i]);
                 [self pushOperator:[expressionTokens objectAtIndex:i]];
             }
             else{
+                //if operator has <= precedence pop from stack all greater operators and enqueue them
+                //then push current operator onto stack
                 while([[operatorPrecedence objectForKey:[expressionTokens objectAtIndex:i]] intValue] <= [[operatorPrecedence objectForKey:[self.operatorStack lastObject]] intValue] && self.operatorStack.count > 0){
                     NSLog(@"Moving operator %@ to queue", [self.operatorStack lastObject]);
                     [self enqueueItem:[self popOperator]];
@@ -150,6 +157,7 @@
             }
         }
     }
+    //enqueue all remaining operators on stack
     while(self.operatorStack.count > 0){
        [self enqueueItem:[self popOperator]]; 
     }

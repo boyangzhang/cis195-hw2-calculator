@@ -8,3 +8,7 @@ http://www.lawrence.edu/fast/greggj/CMSC270/Infix.html
 I also want to take 1 late day to fix some corner cases!
 
 Also divide by 0 returns 0 in that part of the operator because I don't wanna deal with NaNs
+
+Finally, I was attempting to resize large inputs, but XCode kept crashing when I tried autoshrink the text and I don't have time to do many inputs!
+
+Added backspace and expression features, but not enough time (and see note above about autoshrink) to make it handle a huge expression gracefully. (sadface)
