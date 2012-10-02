@@ -1,11 +1,9 @@
 CIS195-HW2-Calculator
 By: Boyang Zhang
 
-I used the Stanford slide deck as the basis for my calculator which is why the naming and GUI is similar, since I had no idea what proper design or style for iOS development is.  However, I implemented infix to postfix conversion algorithm on my own using this as the source:
+I used the Stanford slide deck as the basis for my calculator which is why the naming and GUI is similar.  I had no idea what was the proper way to design and build iOS apps so using the Stanford slide deck as a base was helpful.  However my code still largely differs from the stanford slide deck since I implemented the infix to postfix conversion algorithm as detailed in this link:
 
 http://www.lawrence.edu/fast/greggj/CMSC270/Infix.html
-
-I also want to take 1 late day to fix some corner cases!
 
 Also divide by 0 returns 0 in that part of the operator because I don't wanna deal with NaNs
 
